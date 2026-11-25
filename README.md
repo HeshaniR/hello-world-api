@@ -94,6 +94,9 @@ string: `?name=+alice` is received as `" alice"`; a literal plus is `%2B`.
 - **Characters after the first** are not validated; the rule only concerns the first letter.
   A single value containing a comma (`?name=alice,zoe`) is one name: `Hello Alice,zoe`.
 - **Repeated parameter** (`?name=alice&name=zoe`) returns `400 Invalid Input`.
+- **Unencoded special characters** such as `^ { } | [ ] \` and the backtick are accepted in the query
+  string (configured in `application.properties`), so `?name=^alice` gets the normal JSON
+  `400 Invalid Input` instead of the web server's HTML error page.
 - **Error responses are always JSON**, even if the client's `Accept` header excludes JSON.
   Successful responses follow normal content negotiation (e.g. `Accept: text/plain` → 406).
 - Requests that never reach the endpoint (wrong path, wrong HTTP method) keep Spring Boot's

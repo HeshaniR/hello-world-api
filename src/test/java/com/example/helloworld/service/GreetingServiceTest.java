@@ -49,7 +49,7 @@ class GreetingServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1alice", "_alice", "-bob", "@carl", "Élodie", "ıvan", "Ádám", "日本"})
+    @ValueSource(strings = {"1alice", "_alice", "-bob", "@carl", "^alice", "{alice", "|alice","Élodie", "ıvan", "Ádám", "日本"})
     void rejectsNamesNotStartingWithAnEnglishLetter(String name) {
         assertInvalid(name);
     }
